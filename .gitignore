@@ -1,0 +1,5 @@
+lib
+receipt/migrations
+receipt/__pycache__
+pdfstuff/__pycache__
+db.sqlite3
