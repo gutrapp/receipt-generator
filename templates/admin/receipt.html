@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,6 +10,163 @@
   </head>
 
   <body>
-    <h1>HELLO</h1>
+    <div class="top">
+      <h1 class="text__center">SCI Store</h1>
+      <div class="top__info">
+        <label class="text">Clerk: {{ receipt.clerk.first_name }}</label>
+        <label class="text">Date: {{ receipt.register_date }}</label>
+      </div>
+    </div>
+
+    <div class="info">
+      <h2 class="text__center">Purchase</h2>
+
+      <div class="info__items">
+        {% for item in items %}
+        <div class="items">
+          <div class="items__info">
+            <label>{{ item.quantity }}</label>
+            <label>{{ item.name }}</label>
+          </div>
+          <label>R$ {{ item.price }}</label>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="info__payment">
+        <label class="text">Sub-Total: </label
+        ><label>R$ {{ receipt.subtotal }}</label>
+      </div>
+
+      <div class="info__payment__tax">
+        <label class="text">Tax: </label><label>R$ {{ receipt.tax }}</label>
+      </div>
+
+      <div class="info__payment">
+        <strong class="text">Total: </strong
+        ><strong>R$ {{ receipt.total }}</strong>
+      </div>
+    </div>
+
+    <div class="client">
+      <h2 class="text__center">Payment</h2>
+
+      {% if receipt.payment == "CA" %}
+      <div class="info__payment__info">
+        <label class="text">Payment Method: </label><label>Cash</label>
+      </div>
+      {% endif %} {% if receipt.payment == "CE" %}
+      <div class="info__payment__info">
+        <label class="text">Payment Method: </label><label>Credit</label>
+      </div>
+      {% endif %} {% if receipt.payment == "DE" %}
+      <div class="info__payment__info">
+        <label class="text">Payment Method: </label><label>Debit</label>
+      </div>
+      {% endif %}
+
+      <div class="info__payment__info">
+        <label class="text">Paid: </label><label>R$ {{ receipt.paid }}</label>
+      </div>
+
+      <div class="info__payment__info">
+        <label class="text">Change: </label
+        ><label>R$ {{ receipt.change }}</label>
+      </div>
+    </div>
+
+    <div class="contact">
+      <label class="text">Address: Rua Hermann Hering, 799</label>
+      <label class="text">Tel: 99 99999999</label>
+    </div>
   </body>
 </html>
+
+<style>
+  .top {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid black;
+    column-gap: 0;
+    white-space: nowrap;
+    padding: 2rem;
+  }
+
+  .top__info {
+    display: flex;
+    justify-content: space-between;
+    width: 100cap;
+  }
+
+  .info__items {
+    border-bottom: 1px solid black;
+    padding-bottom: 1rem;
+  }
+
+  .info__payment {
+    display: flex;
+    justify-content: space-between;
+    width: 100cap;
+  }
+
+  .info__payment__info {
+    display: flex;
+    justify-content: space-between;
+    width: 100cap;
+  }
+
+  .info__payment__tax {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    width: 100cap;
+    padding-bottom: 1rem;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid black;
+    column-gap: 0;
+    white-space: nowrap;
+    padding: 2rem;
+  }
+
+  .client {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid black;
+    column-gap: 0;
+    white-space: nowrap;
+    padding: 2rem;
+  }
+
+  .contact {
+    display: flex;
+    flex-direction: column;
+    column-gap: 0;
+    white-space: nowrap;
+    padding: 2rem;
+  }
+
+  .text {
+    width: 100cap;
+    margin-bottom: 0px;
+  }
+
+  .text__center {
+    width: 100cap;
+    margin-bottom: 0px;
+    text-align: center;
+  }
+
+  .items {
+    display: flex;
+    justify-content: space-between;
+    width: 100cap;
+  }
+
+  .items__info {
+    width: 15rem;
+  }
+</style>

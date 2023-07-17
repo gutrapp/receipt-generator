@@ -21,7 +21,7 @@ def generate_receipt_pdf(modeladmin, request, queryset):
             for receipt in queryset:
                 html_string = render_to_string(
                     'admin/receipt.html',
-                    {'receipt': receipt, 'current date': datetime.datetime.now()}
+                    {'receipt': receipt}
                 )
 
                 zip_file.writestr(
@@ -49,7 +49,7 @@ def generate_receipt_pdf(modeladmin, request, queryset):
     )
     html_string = render_to_string(
         'admin/receipt.html',
-        {'requisicao': queryset.first(), 'data_atual': datetime.datetime.now()},
+        {'receipt': queryset.first(), 'items': queryset.first().items.all()},
     )
 
     with tempfile.NamedTemporaryFile(delete=True) as output:
